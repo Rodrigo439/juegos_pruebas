@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bingo Musical 🎵</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin: 20px; }
+    h1 { margin-bottom: 10px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .cell {
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    }
+    label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bingo Musical 🎶</h1>
+  <p>Marcá las canciones cuando suenen</p>
+
+  <div id="bingo-board" class="grid"></div>
+
+  <script>
+    const canciones = [
+      "As It Was - Harry Styles",
+      "Blinding Lights - The Weeknd",
+      "Shivers - Ed Sheeran",
+      "Dance Monkey - Tones and I",
+      "Levitating - Dua Lipa",
+      "Don't Start Now - Dua Lipa",
+      "Watermelon Sugar - Harry Styles",
+      "Drivers License - Olivia Rodrigo",
+      "Bad Habits - Ed Sheeran",
+      "Heat Waves - Glass Animals",
+      "Stay - The Kid LAROI & Justin Bieber",
+      "Good 4 U - Olivia Rodrigo",
+      "Peaches - Justin Bieber",
+      "Industry Baby - Lil Nas X & Jack Harlow",
+      "Montero (Call Me By Your Name) - Lil Nas X",
+      "Savage Love - Jason Derulo",
+      "Sunflower - Post Malone",
+      "Old Town Road - Lil Nas X",
+      "Shape of You - Ed Sheeran",
+      "Senorita - Shawn Mendes & Camila Cabello",
+      "Uptown Funk - Bruno Mars",
+      "Rolling in the Deep - Adele",
+      "Shake It Off - Taylor Swift",
+      "Someone You Loved - Lewis Capaldi",
+      "Let Her Go - Passenger",
+      "Roar - Katy Perry",
+      "Happier - Marshmello & Bastille",
+      "Believer - Imagine Dragons",
+      "Memories - Maroon 5",
+      "Viva La Vida - Coldplay"
+    ];
+
+    function shuffle(array) {
+      return array
+        .map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
+    }
+
+    function generateBoard() {
+      const board = document.getElementById("bingo-board");
+      const cancionesRandom = shuffle(canciones).slice(0, 16);
+      cancionesRandom.forEach(cancion => {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.innerHTML = `
+          <label>
+            <input type="checkbox">
+            ${cancion}
+          </label>
+        `;
+        board.appendChild(cell);
+      });
+    }
+
+    generateBoard(); // Generar al cargar la página
+  </script>
+</body>
+</html>
